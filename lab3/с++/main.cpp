@@ -71,32 +71,35 @@ public:
 		ifstream input;
 		input.open(filename);
 
-		input >> expresion;
-		cout << expresion << endl;
-		for (char ch : expresion) {
-			switch(ch){
-			case '(':
-				paratheses.push(1);
-				break;
-			case ')':
-				if (!paratheses.empty()) {
-					paratheses.pop();
+		while (getline(input, expresion)) {
+
+			cout << expresion << endl;
+			for (char ch : expresion) {
+				switch (ch) {
+				case '(':
+					paratheses.push(1);
+					break;
+				case ')':
+					if (!paratheses.empty()) {
+						paratheses.pop();
+					}
+					else {
+						cout << "Expression is wrong" << endl;
+						return;
+					}
+					break;
 				}
-				else {
-					cout << "Expression is wrong" << endl;
-					return;
-				}
-				break;
+			}
+
+			if (!paratheses.empty()) {
+				cout << "Expression is wrong" << endl;
+			}
+			else {
+				cout << "Expression is right" << endl;
 			}
 		}
-
-		if (!paratheses.empty()) {
-			cout << "Expression is wrong" << endl;
-		}
-		else {
-			cout << "Expression is right" << endl;
-		}
 	}
+
 
 };
 
